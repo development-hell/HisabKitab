@@ -1,0 +1,12 @@
+# Ignore temp or exported artifacts
+*.bak
+*.tmp
+*.log
+*.zip
+*.tar
+*.rar
+*.DS_Store
+Thumbs.db
+# Keep only source markdown and SQL files
+!*.md
+!*.sql

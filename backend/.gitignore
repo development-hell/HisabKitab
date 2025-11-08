@@ -1,0 +1,59 @@
+# ==============================
+# Backend (Django + DRF + uv)
+# ==============================
+
+# ---- Python bytecode ----
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ---- uv environment ----
+.venv/
+env/
+venv/
+uv.lock
+
+# ---- Django specific ----
+*.sqlite3
+db.sqlite3
+local_settings.py
+media/
+staticfiles/
+static/
+
+# ---- Logs / Tests ----
+*.log
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+*.egg-info/
+*.eggs/
+*.manifest
+
+# ---- Build / dist ----
+build/
+dist/
+downloads/
+eggs/
+sdist/
+var/
+*.egg
+
+# ---- Linters / Formatters ----
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+
+# ---- Migrations ----
+# Uncomment the next line if you want to ignore migrations (not recommended)
+# */migrations/
+# !*/migrations/__init__.py
