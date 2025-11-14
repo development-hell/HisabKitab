@@ -1,0 +1,64 @@
+/* =========================================================
+   COMPONENT UTILITIES (Cards, Button Styles)
+   ========================================================= */
+
+/* Base Button */
+@utility btn {
+	@apply m-3 inline-flex items-center justify-center;
+	font-weight: 700;
+	border-radius: 0.5rem;
+	padding: 0.5rem 1rem;
+	
+	@variant hover {
+		transform: scale(1.05);
+	}
+}
+
+/* Outline Button */
+@utility btn-outline {
+	border: 1px solid var(--color-primary);
+	color: var(--color-primary);
+
+	@variant hover {
+		background-color: var(--color-primary);
+		color: var(--color-primary-foreground);
+	}
+}
+
+/* Card Component */
+@utility card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: var(--color-surface);
+	color: var(--color-surface-foreground);
+	border-radius: 0.75rem;
+	padding: calc(var(--spacing) * 6);
+	transition: all 0.2s ease-in-out;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+	@variant hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+		transform: scale(1.05);
+	}
+}
+
+/* Card Title */
+@utility card-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* Card Subtitle */
+@utility card-subtitle {
+	color: var(--color-muted);
+	font-size: var(--text-sm);
+}
+
+/* Card Value */
+@utility card-value {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--text-3xl);
+	margin-top: calc(var(--spacing) * 3);
+}

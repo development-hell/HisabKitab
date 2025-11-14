@@ -1,0 +1,50 @@
+/* =========================================================
+   THEME TOKENS (LIGHT + DARK)
+   ========================================================= */
+
+/* ===== Light Theme ===== */
+@theme {
+	--color-background: oklch(0.98 0 0); /* #FAFAFA */
+	--color-foreground: oklch(0.28 0.07 260); /* slate-900 */
+
+	--color-surface: oklch(1 0 0); /* white */
+	--color-surface-foreground: oklch(0.28 0.07 260);
+
+	--color-muted: oklch(0.75 0.03 250); /* slate-400 */
+	--color-border: oklch(0.93 0.01 255); /* slate-200 */
+
+	--color-primary: oklch(0.63 0.16 262); /* blue-600 */
+	--color-primary-foreground: oklch(1 0 0); /* white */
+
+	--color-accent: oklch(0.81 0.13 158); /* emerald-500 */
+	--color-accent-foreground: oklch(1 0 0); /* white */
+
+	--color-danger: oklch(0.72 0.22 25); /* red-500 */
+	--color-danger-foreground: oklch(1 0 0); /* white */
+}
+
+/* ===== Dark Mode Tokens ===== */
+@layer theme {
+	:root,
+	:host {
+		@variant dark {
+			--color-background: oklch(0.23 0.01 260); /* near #111212 */
+			--color-foreground: oklch(0.95 0.01 260); /* near white */
+
+			--color-surface: oklch(0.27 0.01 260); /* deep panel */
+			--color-surface-foreground: oklch(0.95 0.01 260);
+
+			--color-muted: oklch(0.7 0.02 260); /* gray-400 equivalent */
+			--color-border: oklch(0.4 0.01 260);
+
+			--color-primary: oklch(0.67 0.22 262); /* blue-500 dark variant */
+			--color-primary-foreground: oklch(1 0 0);
+
+			--color-accent: oklch(0.78 0.1 158); /* emerald softer */
+			--color-accent-foreground: oklch(0.28 0.07 260);
+
+			--color-danger: oklch(0.67 0.25 25); /* red-400 → improved contrast */
+			--color-danger-foreground: oklch(0.28 0.07 260);
+		}
+	}
+}

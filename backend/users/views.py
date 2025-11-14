@@ -2,14 +2,16 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-
+from .permissions import IsAdminOrSelf
 from .models import User
 from .serializers import UserSerializer
+from rest_framework import permissions
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
 
     def get_permissions(self):
         if self.action in ["create"]:

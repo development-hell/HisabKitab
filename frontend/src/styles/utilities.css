@@ -1,0 +1,61 @@
+/* =========================================================
+   BASIC UTILITIES (backgrounds, text, borders)
+   ========================================================= */
+
+/* Backgrounds */
+@utility bg-base {
+  background-color: var(--color-background);
+}
+
+@utility bg-surface {
+  background-color: var(--color-surface);
+}
+
+/* Text Colors */
+@utility text-base {
+  color: var(--color-foreground);
+}
+
+@utility text-muted {
+  color: var(--color-muted);
+}
+
+/* Borders */
+@utility border-base {
+  border-color: var(--color-border);
+}
+
+/* Buttons (Solid) */
+@utility btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+@utility btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+@utility btn-danger {
+  background-color: var(--color-danger);
+  color: var(--color-danger-foreground);
+}
+
+/* Shadows */
+@utility shadow-smooth {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+@utility shadow-lg-smooth {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+@utility active-link {
+	background-color : var(--color-primary);
+}
+
+@utility non-active-link {
+	@variant hover {
+		background-color : var(--color-muted);
+	}
+}

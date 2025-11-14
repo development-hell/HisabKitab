@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Load modular design system */
+@import "./styles/tokens.css";
+@import "./styles/utilities.css";
+@import "./styles/components.css";
+@import "./styles/transitions.css";
+
