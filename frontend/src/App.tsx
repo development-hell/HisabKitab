@@ -13,7 +13,7 @@ export default function App() {
 
 	// 2. If loading is done and a user exists, redirect to the app.
 	if (user) {
-		return <Navigate to="/payees" replace />;
+		return <Navigate to="/contacts" replace />;
 	}
 
 	// 3. If loading is done and there is no user, send to the landing page.

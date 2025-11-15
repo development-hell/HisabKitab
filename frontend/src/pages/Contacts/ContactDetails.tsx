@@ -1,12 +1,12 @@
 import { ArrowLeft } from "lucide-react";
 
 interface Props {
-	payeeId: number | null;
+	contactId: number | null;
 	onBack: () => void;
 }
 
-export default function PayeeDetails({ payeeId, onBack }: Props) {
-	if (!payeeId) {
+export default function ContactDetails({ contactId: contactId, onBack }: Props) {
+	if (!contactId) {
 		return <div className="h-full flex items-center justify-center text-muted">Select a Payee to continue…</div>;
 	}
 
@@ -17,12 +17,12 @@ export default function PayeeDetails({ payeeId, onBack }: Props) {
 				<button onClick={onBack} className="p-2 rounded-md hover:bg-muted">
 					<ArrowLeft />
 				</button>
-				<span className="font-semibold text-lg">Payee #{payeeId}</span>
+				<span className="font-semibold text-lg">Contact #{contactId}</span>
 			</div>
 
 			{/* Main Content */}
 			<div className="p-6 space-y-4">
-				<h2 className="text-2xl font-bold">Payee #{payeeId}</h2>
+				<h2 className="text-2xl font-bold">Contact #{contactId}</h2>
 
 				<p className="text-muted">Here you can show financial actions, reports, payments etc.</p>
 

@@ -7,7 +7,7 @@ import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import Connections from "./pages/Connections";
-import PayeesPage from "./pages/Payees/PayeesPage";
+import ContactsPage from "./pages/Contacts/ContactsPage";
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/Home/HomePage";
 import Login from "./pages/Login";
@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 						<Route path="/connections" element={<Connections />} />
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/settings" element={<Settings />} />
-						<Route path="/payees" element={<PayeesPage />} />
+						<Route path="/contacts" element={<ContactsPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

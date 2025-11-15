@@ -50,7 +50,7 @@ export default function Sidebar() {
 				{/* Links */}
 				<nav className="flex-1 p-4 space-y-3">
 					<SidebarLink to="/dashboard" label="Dashboard" icon={<Home />} collapsed={collapsed} />
-					<SidebarLink to="/payees" label="Payees" icon={<Users />} collapsed={collapsed} />
+					<SidebarLink to="/contacts" label="Contacts" icon={<Users />} collapsed={collapsed} />
 					<SidebarLink to="/connections" label="Connections" icon={<LinkIcon />} collapsed={collapsed} />
 				</nav>
 				<nav className="p-4 space-y-3">

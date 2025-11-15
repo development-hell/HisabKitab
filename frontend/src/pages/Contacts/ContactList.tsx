@@ -1,21 +1,21 @@
-interface PayeeListProps {
+interface ContactListProps {
 	onSelect: (id: number) => void;
 	selected: number | null;
 }
 
-const mockPayees = [
+const mockContacts = [
 	{ id: 1, name: "Rohan Sharma", lastSeen: "12 min ago" },
 	{ id: 2, name: "Sneha Patel", lastSeen: "1 hour ago" },
 	{ id: 3, name: "Mohan Lal", lastSeen: "Yesterday" },
 ];
 
-export default function PayeeList({ onSelect, selected }: PayeeListProps) {
+export default function ContactList({ onSelect, selected }: ContactListProps) {
 	return (
 		<div className="h-full flex flex-col">
-			<div className="p-4 font-semibold border-b border-base text-xl">Payees</div>
+			<div className="p-4 font-semibold border-b border-base text-xl">Contacts</div>
 
 			<div className="flex-1 overflow-y-auto">
-				{mockPayees.map((p) => (
+				{mockContacts.map((p) => (
 					<div
 						key={p.id}
 						onClick={() => onSelect(p.id)}
