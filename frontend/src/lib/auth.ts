@@ -1,11 +1,9 @@
-// src/lib/auth.ts
 import { jwtDecode } from "jwt-decode";
-// Import the base URL from axios.ts to keep it consistent
 import { API_BASE_URL } from "./axios";
 
 const ACCESS_KEY = "access";
 const REFRESH_KEY = "refresh";
-const USER_KEY = "user"; // Key for storing user object in localStorage
+const USER_KEY = "user";
 
 export const getAccessToken = () => localStorage.getItem(ACCESS_KEY);
 export const getRefreshToken = () => localStorage.getItem(REFRESH_KEY);
@@ -69,9 +67,6 @@ export function logoutAndRedirect(next?: string) {
 /**
  * Refresh access token using refresh token.
  * Returns new access token string or null.
- *
- * FIX: This now uses fetch with the *correct* full API URL,
- * preventing a circular dependency with the axios instance.
  */
 export async function refreshAccessToken(): Promise<string | null> {
 	const refresh = getRefreshToken();
@@ -93,7 +88,7 @@ export async function refreshAccessToken(): Promise<string | null> {
 		if (!res.ok) {
 			const text = await res.text().catch(() => "Refresh failed");
 			console.error("Refresh token request failed:", text);
-			return null; // Return null on failure
+			return null;
 		}
 
 		const data = await res.json();
@@ -103,6 +98,6 @@ export async function refreshAccessToken(): Promise<string | null> {
 		return newAccess;
 	} catch (error) {
 		console.error("Error during token refresh:", error);
-		return null; // Return null on network error
+		return null;
 	}
 }

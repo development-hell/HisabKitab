@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const logout = () => {
 		clearTokens();
 		setUser(null);
-		resetAxiosAuthState(); // FIX: Reset the refresh queue
+		resetAxiosAuthState();
 	};
 
 	return <AuthContext.Provider value={{ user, login, logout, loading }}>{children}</AuthContext.Provider>;

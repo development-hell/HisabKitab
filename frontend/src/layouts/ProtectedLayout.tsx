@@ -1,11 +1,9 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-// FIX: Use correct relative paths for imports
+import ProtectedSkeleton from "../components/ProtectedSkeleton";
 import { useAuth } from "../hooks/useAuth";
 import AppLayout from "./AppLayout";
-import ProtectedSkeleton from "../components/ProtectedSkeleton";
 
 export default function ProtectedLayout() {
-	// FIX: Removed the extra '_' typo after the destructuring
 	const { user, loading } = useAuth();
 	const location = useLocation();
 

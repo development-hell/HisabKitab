@@ -1,15 +1,7 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./hooks/useAuth";
 import ProtectedSkeleton from "./components/ProtectedSkeleton";
+import { useAuth } from "./hooks/useAuth";
 
-/**
- * This is the root component for your site.
- * Its only job is to check the auth status and redirect
- * to the correct starting page.
- *
- * - Authenticated users are sent to "/payees".
- * - Non-authenticated users are sent to "/landing".
- */
 export default function App() {
 	const { user, loading } = useAuth();
 

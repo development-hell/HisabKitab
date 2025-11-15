@@ -7,10 +7,10 @@ import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import Connections from "./pages/Connections";
+import PayeesPage from "./pages/Payees/PayeesPage";
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/Home/HomePage";
 import Login from "./pages/Login";
-import PayeesPage from "./pages/Payees/PayeesPage";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 

@@ -1,7 +1,7 @@
+import { CheckCircle, Clock, Users, X, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
-import api from "../lib/axios";
 import { useAuth } from "../hooks/useAuth";
-import { Users, Clock, CheckCircle, XCircle, X } from "lucide-react";
+import api from "../lib/axios";
 
 interface Summary {
 	totalConnections: number;

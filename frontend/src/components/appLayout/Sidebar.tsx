@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { LogOut, Menu, X } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom";
-import SidebarLink from "./SidebarLink";
-import { Home, Users, User, Settings, Link as LinkIcon} from "lucide-react";
 import clsx from "clsx";
+import { Home, Link as LinkIcon, LogOut, Menu, Settings, User, Users, X } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import SidebarLink from "./SidebarLink";
 
 export default function Sidebar() {
 	const { logout } = useAuth();
@@ -37,7 +36,11 @@ export default function Sidebar() {
 			>
 				{/* Header */}
 				<div className={clsx("flex items-center justify-between border-b border-base p-4", collapsed && "justify-center")}>
-					{!collapsed && <h1 className="text-2xl font-bold text-primary"><Link to="/home">HisabKitab</Link></h1>}
+					{!collapsed && (
+						<h1 className="text-2xl font-bold text-primary">
+							<Link to="/home">HisabKitab</Link>
+						</h1>
+					)}
 
 					<button onClick={() => setCollapsed(!collapsed)} className="hidden md:flex p-2 rounded-md hover:bg-muted transition">
 						{collapsed ? <Menu size={20} /> : <X size={20} />}
@@ -56,12 +59,7 @@ export default function Sidebar() {
 				</nav>
 
 				{/* Logout */}
-				<button
-					onClick={handleLogout}
-					className={clsx(
-						"btn btn-danger",
-					)}
-				>
+				<button onClick={handleLogout} className={clsx("btn btn-danger")}>
 					<LogOut size={18} />
 					{!collapsed && <span>Logout</span>}
 				</button>

@@ -1,11 +1,7 @@
-// src/lib/axios.ts
 import axios, { type InternalAxiosRequestConfig } from "axios";
-// This file will now import from the new auth.ts
 import { getAccessToken, logoutAndRedirect, refreshAccessToken } from "./auth";
 
-// Exporting the base URL to be used in auth.ts for refresh
-export const API_BASE_URL =
-	import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api/";
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api/";
 
 const api = axios.create({
 	baseURL: API_BASE_URL,
@@ -39,10 +35,6 @@ function onRefreshed(token: string | null) {
 	subscribers.splice(0, subscribers.length).forEach((cb) => cb(token));
 }
 
-/**
- * NEW: This function is called by AuthContext.logout()
- * to fix the "can't login after logout" bug.
- */
 export function resetAxiosAuthState() {
 	isRefreshing = false;
 	refreshPromise = null;
@@ -62,11 +54,7 @@ api.interceptors.response.use(
 		const status = error.response.status;
 
 		// Check for 401, not a retry, and not an auth path
-		if (
-			status === 401 &&
-			!originalRequest._retry &&
-			!originalRequest.url?.includes("token")
-		) {
+		if (status === 401 && !originalRequest._retry && !originalRequest.url?.includes("token")) {
 			originalRequest._retry = true;
 
 			// Already refreshing? Queue this request.
@@ -100,14 +88,12 @@ api.interceptors.response.use(
 				onRefreshed(newToken);
 
 				if (!newToken) {
-					// This case is handled by the catch block, but as a safeguard:
 					return Promise.reject(error);
 				}
 
 				originalRequest.headers.Authorization = `Bearer ${newToken}`;
 				return api(originalRequest);
 			} catch (err) {
-				// This catch block is for safety, though the promise catch handles logout
 				isRefreshing = false;
 				refreshPromise = null;
 				onRefreshed(null);
