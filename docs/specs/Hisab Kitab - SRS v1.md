@@ -156,6 +156,7 @@ This 6-table model is the foundation for the MVP.
 | `payer_entity_id` | Foreign Key to `Entity`. (Can be `SYSTEM` for Opening Balances). |
 | `payee_entity_id` | Foreign Key to `Entity`. |
 | `amount` | Positive decimal. |
+| `mode_type` | (e.g., `BANK_TRANSFER`, `UPI`, `CASH`) |
 | `status` | (`pending`, `confirmed`, `rejected`) |
 | `description` | Text, optional. |
 | `transaction_date`| Timestamp, user-configurable. |
@@ -167,14 +168,13 @@ This 6-table model is the foundation for the MVP.
 | `connection_id` | Primary Key |
 | `user_a_id` | Foreign Key to `User` (The initiator). |
 | `user_b_id` | Foreign Key to `User` (The receiver). |
-| `status` | (`pending`, `accepted`, `blocked`) |
+| `status` | (`pending`, `accepted`, `rejected`, `suspended`, `blocked`) |
 
 | Table: **`Connection_Permission`** | Purpose: The "Connection Settings" for each friend. |
 | :--- | :--- |
 | `permission_id` | Primary Key |
 | `payer_user_id` | Foreign Key to `User`. The user *sending* money. |
 | `payee_user_id` | Foreign Key to `User`. The user *receiving* money. |
-| `mode_type` | (e.g., `BANK_TRANSFER`, `UPI`, `CASH`) |
 | `is_allowed` | Boolean. The master switch. |
 | `is_auto_approve_on`| Boolean. **Can only be `true` if `default_entity_id` is set.** |
 | `default_entity_id`| Foreign Key to `Entity`. The default receiving account. |
