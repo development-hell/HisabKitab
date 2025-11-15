@@ -68,23 +68,30 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
-## 2. Pending Code Changes (To-Do)
-
-### ◻️ Create User Registration Page
+### ☑️ Create User Registration Page
 
 **Goal:** Build the frontend registration page and connect it to the existing `POST /api/users/` endpoint.
 
-* **[ ]** **Create File:** Create a new page file at `frontend/src/pages/Register.tsx`.
-* **[ ]** **Build Form:** Add a form to the new page with fields for:
-    * First Name
-    * Last Name
-    * Username
-    * Email
-    * Password
-* **[ ]** **Add Route:** In `frontend/src/main.tsx`, add the new `/register` route as a standalone route (like `/login`).
-* **[ ]** **Implement Logic:** Create a `handleSubmit` function that calls the `POST /api/users/` endpoint with the form data.
-* **[ ]** **Add Error Handling:** Add state to display backend validation errors (e.g., "This username is already taken.").
-* **[ ]** **Handle Success:** On successful registration, redirect the user to the `/login` page with a success message.
+* **[x]** **Create File:** Create new page file at `frontend/src/pages/Register.tsx`.
+* **[x]** **Build Form:** Add form with fields for name, username, email, and password.
+* **[x]** **Add Route:** In `frontend/src/main.tsx`, add the new `/register` route as a standalone route.
+* **[x]** **Implement Logic:** Create `handleSubmit` function that calls `POST /api/users/`.
+* **[x]** **Add Error Handling:** Add state to display backend validation errors.
+* **[x]** **Handle Success:** On success, redirect to `/login` with `?status=success` query param.
+* **[x]** **Update `Login.tsx`:** Add `useEffect` to check for success param and display a welcome message.
+
+---
+
+## 2. Pending Code Changes (To-Do)
+
+### ◻️ Unify "Contacts" List (Show Connections)
+
+**Goal:** Update the "Contacts" page to display both `External Contacts` (from mock data) and `User Connections` (from the API), fulfilling the "Chat-Centric UI" vision.
+
+* **[ ]** **Backend (Serializer):** Update `connections/serializers.py`. The `GET /api/connections/` response needs to include the *full user details* for the `requester` and `receiver`, not just their IDs/usernames. (e.g., use a nested `UserSerializer`). This is needed to display their name in the list.
+* **[ ]** **Frontend (Data Fetching):** In `ContactList.tsx`, add a `useEffect` to fetch from `api.get("connections/")`.
+* **[ ]** **Frontend (Merge Logic):** In `ContactList.tsx`, create a new state variable (e.g., `combinedList`). Merge the `mockContacts` with the results from the `connections/` API.
+* **[ ]** **Frontend (Render):** Update the `map` function to render the `combinedList`, differentiating between a `Contact` (e.g., "Grocery Store") and a `Connection` (e.g., "Kishan Dev").
 
 ---
 

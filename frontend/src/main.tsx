@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/Home/HomePage";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route element={<MainLayout />}>
 						<Route path="/home" element={<HomePage />} />
 						{/* <Route path="/about" element={<AboutPage />} /> */}

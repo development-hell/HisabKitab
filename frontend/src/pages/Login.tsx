@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
@@ -14,6 +14,13 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState("");
+
+	useEffect(() => {
+		const params = new URLSearchParams(location.search);
+		if (params.get("status") === "success") {
+			setMessage("✅ Registration successful! Please sign in.");
+		}
+	}, [location.search]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -57,7 +64,7 @@ export default function Login() {
 					{loading ? "Signing in..." : "Sign in"}
 				</button>
 
-				{message && <p className="text-danger mt-3">{message}</p>}
+				{message && <p className={`text-center mt-3 ${message.startsWith("✅") ? "text-accent" : "text-danger"}`}>{message}</p>}
 			</form>
 		</div>
 	);
