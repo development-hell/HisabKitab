@@ -1,11 +1,11 @@
-from rest_framework import status, viewsets
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from .permissions import IsAdminOrSelf
+
 from .models import User
+from .permissions import IsAdminOrSelf
 from .serializers import UserSerializer
-from rest_framework import permissions
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -19,9 +19,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return [IsAuthenticated()]
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({"detail": "Listing all users is not permitted."}, status=status.HTTP_403_FORBIDDEN)
 
     @action(detail=False, methods=["get", "patch"], url_path="me")
     def me(self, request):

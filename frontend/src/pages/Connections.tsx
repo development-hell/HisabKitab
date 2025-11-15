@@ -16,9 +16,12 @@ interface Connection {
 export default function Connections() {
 	const { user } = useAuth();
 	const [connections, setConnections] = useState<Connection[]>([]);
-	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
 	const [message, setMessage] = useState("");
 	const [loading, setLoading] = useState(true);
+
+	const [error, setError] = useState("");
+	const [success, setSuccess] = useState("");
 
 	const fetchConnections = async () => {
 		try {
@@ -35,23 +38,26 @@ export default function Connections() {
 
 	const handleSend = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setError("");
+		setSuccess("");
+
 		try {
-			const allUsers = await api.get("users/");
-			const receiver = allUsers.data.find((u: any) => u.email === email);
-
-			if (!receiver) return alert("User not found!");
-
 			await api.post("connections/", {
-				receiver: receiver.user_id,
+				receiver: username,
 				message,
 			});
 
-			setEmail("");
+			setUsername("");
 			setMessage("");
 			fetchConnections();
-			alert("Connection request sent!");
-		} catch (err) {
-			alert("Failed to send request.");
+			setSuccess("Connection request sent!");
+		} catch (err: any) {
+			const errorMsg =
+				err.response?.data?.detail || 
+				err.response?.data?.receiver ||
+				"Failed to send request.";
+
+			setError(String(errorMsg));
 			console.error(err);
 		}
 	};
@@ -86,10 +92,10 @@ export default function Connections() {
 
 				<form onSubmit={handleSend} className="space-y-3">
 					<input
-						type="email"
-						placeholder="Enter email of user"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						type="text"
+						placeholder="Enter username of user"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
 						className="w-full border border-base rounded-md px-3 py-2 bg-surface"
 						required
 					/>
@@ -104,6 +110,9 @@ export default function Connections() {
 					<button type="submit" className="btn btn-primary w-full flex items-center justify-center gap-2">
 						<Send size={16} /> Send Request
 					</button>
+
+					{error && <p className="text-sm text-danger text-center mt-2">{error}</p>}
+					{success && <p className="text-sm text-accent text-center mt-2">{success}</p>}
 				</form>
 			</div>
 
@@ -116,9 +125,12 @@ export default function Connections() {
 				) : (
 					<ul className="divide-y divide-base">
 						{connections.map((conn) => {
-							console.log(conn);
-							console.log(user?.user_id);
 							const isRequester = conn.requester === user?.user_id;
+
+							// --- NOTE: This 'person' logic will need to be updated ---
+							// The API now only returns a user ID for the receiver.
+							// We will need to update the ConnectionSerializer to provide
+							// the receiver's details (username, name) for this list.
 							const person = conn.receiver;
 
 							return (
@@ -126,7 +138,7 @@ export default function Connections() {
 									{/* USER INFO */}
 									<div>
 										<p className="font-medium text-foreground">
-											{/*{person?.username || person?.first_name || `User #${person?.user_id}`}*/}
+											{/* TODO: Update this when serializer is updated */}
 											{`User #${person}`}
 										</p>
 
