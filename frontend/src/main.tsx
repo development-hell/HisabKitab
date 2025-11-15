@@ -5,6 +5,7 @@ import "./index.css";
 
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
+import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import Connections from "./pages/Connections";
 import ContactsPage from "./pages/Contacts/ContactsPage";
@@ -20,8 +21,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<App />} />
-					<Route path="/home" element={<HomePage />} />
 					<Route path="/login" element={<Login />} />
+					<Route element={<MainLayout />}>
+						<Route path="/home" element={<HomePage />} />
+						{/* <Route path="/about" element={<AboutPage />} /> */}
+					</Route>
 					{/* Protected Routes */}
 					<Route element={<ProtectedLayout />}>
 						<Route path="/dashboard" element={<Dashboard />} />
