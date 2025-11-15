@@ -53,16 +53,30 @@ export default function Sidebar() {
 					<SidebarLink to="/contacts" label="Contacts" icon={<Users />} collapsed={collapsed} />
 					<SidebarLink to="/connections" label="Connections" icon={<LinkIcon />} collapsed={collapsed} />
 				</nav>
+
+				{/* Profile, Settings & Logout */}
 				<nav className="p-4 space-y-3">
 					<SidebarLink to="/profile" label="Profile" icon={<User />} collapsed={collapsed} />
 					<SidebarLink to="/settings" label="Settings" icon={<Settings />} collapsed={collapsed} />
-				</nav>
 
-				{/* Logout */}
-				<button onClick={handleLogout} className={clsx("btn btn-danger")}>
-					<LogOut size={18} />
-					{!collapsed && <span>Logout</span>}
-				</button>
+					<div className="relative group">
+						<button
+							onClick={handleLogout}
+							className={clsx("flex items-center gap-3 px-3 py-2 rounded-md font-medium transition non-active-link text-danger w-full group-hover:scale-110")}
+						>
+							<span className={clsx("w-5 h-5", collapsed && "mx-auto")}>
+								<LogOut size={18} />
+							</span>
+							{!collapsed && <span>Logout</span>}
+						</button>
+						{/* Tooltip */}
+						{collapsed && (
+							<div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-3 py-1.5 rounded-md shadow-smooth bg-foreground text-background opacity-0 group-hover:opacity-100 -hover:translate-x-1 text-sm whitespace-nowrap transition-all duration-200">
+								Logout
+							</div>
+						)}
+					</div>
+				</nav>
 			</aside>
 
 			{/* Mobile Overlay */}
