@@ -2,9 +2,7 @@
 
 This is a living document to track pending development tasks, refactors, and backlog items.
 
-## 1. Pending Code Changes (Done)
-
-Tasks that have been discussed and are ready to be implemented.
+## 1. Completed Tasks
 
 ### ☑️ Rename 'Payees' to 'Contacts' in Frontend
 * **[x]** Rename `frontend/src/pages/Payees/` directory and files.
@@ -44,8 +42,7 @@ Tasks that have been discussed and are ready to be implemented.
 * **[x]** **Frontend (Refactor):** Update `frontend/src/pages/Connections.tsx`.
     * Remove the `api.get("users/")` call from `handleSend`.
     * Send the `username` directly in the `api.post("connections/", ...)` call.
-    * Update the `catch` block to display the detailed error messages from the backend (e.g., `err.response?.data?.detail`).
-    * Ensure the `username` state and text input are used.
+    * Update the `catch` block to display the detailed error messages from the backend.
 
 ---
 
@@ -61,7 +58,19 @@ Tasks that have been discussed and are ready to be implemented.
 
 ---
 
-## 2. Future Tasks (Backlog)
+## 2. Pending Code Changes (To-Do)
+
+### ◻️ Update Homepage Content
+
+**Goal:** Refine the content and style of the public homepage components.
+
+* **[ ]** Refine `Hero.tsx`
+* **[ ]** Refine `Features.tsx`
+* **[ ]** Refine `CTA.tsx`
+
+---
+
+## 3. Future Tasks (Backlog)
 
 New features and ideas to be prioritized and worked on next.
 
