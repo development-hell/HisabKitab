@@ -1,7 +1,7 @@
 export default function Features() {
 	return (
-		<section id="features" className="py-20 px-6 bg-[rgb(var(--color-card))]">
-			<h3 className="text-3xl font-semibold text-center mb-12">Why Choose HisabKitab?</h3>
+		<section id="features" className="py-20 px-6 bg-surface">
+			<h3 className="text-3xl font-semibold text-center mb-12 text-surface-foreground">Why Choose HisabKitab?</h3>
 
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
 				<div className="card">

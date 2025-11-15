@@ -17,8 +17,8 @@ This is a living document to track pending development tasks, refactors, and bac
 
 **Goal:** Improve the consistency and usability of the main sidebar.
 
-* **[x]** **Reduce Logout Button Visuals:** In `Sidebar.tsx`, change the solid red "Logout" button to a more subtle style (e.g., ghost button with red text/icon on hover) to make it less distracting.
-* **[x]** **Align Collapsed Logout Icon:** In `Sidebar.tsx`, add logic to center the icon on the "Logout" button when the sidebar is collapsed, matching the alignment of the `SidebarLink` components.
+* **[x]** **Reduce Logout Button Visuals:** In `Sidebar.tsx`, change the solid red "Logout" button to a more subtle style.
+* **[x]** **Align Collapsed Logout Icon:** In `Sidebar.tsx`, center the "Logout" icon when collapsed.
 
 ---
 
@@ -34,7 +34,7 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ### ☑️ Refactor Connection Creation (Backend & Frontend)
 
-**Goal:** Secure the API and streamline the "Send Connection" feature. This will involve removing the public user list endpoint and having the backend handle all logic for finding and validating a user by their username.
+**Goal:** Secure the API and streamline the "Send Connection" feature.
 
 * **[x]** **Backend (Security):** Modify `users/views.py`. Change the `list` method in `UserViewSet` to prevent it from leaking all users.
 * **[x]** **Backend (Serializer):** Update `connections/serializers.py`. Change the `receiver` field to `SlugRelatedField(slug_field='username', ...)` to accept a username string directly.
@@ -53,20 +53,38 @@ This is a living document to track pending development tasks, refactors, and bac
 * **[x]** **Refactor `MainLayout.tsx`:** Update the file to include the public `Navbar`, `Footer`, and an `Outlet` for page content.
 * **[x]** **Refactor `HomePage.tsx`:** Remove the `Navbar` and `Footer` components.
 * **[x]** **Update `main.tsx`:** Wrap the `/home` route (and other future public routes) within the `MainLayout`.
-* **[x]** **Move Shared Components:** Move `Navbar.tsx` and `Footer.tsx` from `src/pages/Home/components/` to a new shared directory, `src/components/mainLayout/`.
+* **[x]** **Move Shared Components:** Move `Navbar.tsx` and `Footer.tsx` from `src/pages/Home/components/` to `src/components/mainLayout/`.
 * **[x]** **Update Imports:** Update the import paths in `src/layouts/MainLayout.tsx` to point to the new location.
+
+---
+
+### ☑️ Update Homepage Content
+
+**Goal:** Refine the content and style of the public homepage components.
+
+* **[x]** Refine `Hero.tsx`: Update text to `text-muted` and fix button styles.
+* **[x]** Refine `Features.tsx`: Update background to `bg-surface`.
+* **[x]** Refine `CTA.tsx`: Update text to `text-muted` and fix button styles.
 
 ---
 
 ## 2. Pending Code Changes (To-Do)
 
-### ◻️ Update Homepage Content
+### ◻️ Create User Registration Page
 
-**Goal:** Refine the content and style of the public homepage components.
+**Goal:** Build the frontend registration page and connect it to the existing `POST /api/users/` endpoint.
 
-* **[ ]** Refine `Hero.tsx`
-* **[ ]** Refine `Features.tsx`
-* **[ ]** Refine `CTA.tsx`
+* **[ ]** **Create File:** Create a new page file at `frontend/src/pages/Register.tsx`.
+* **[ ]** **Build Form:** Add a form to the new page with fields for:
+    * First Name
+    * Last Name
+    * Username
+    * Email
+    * Password
+* **[ ]** **Add Route:** In `frontend/src/main.tsx`, add the new `/register` route as a standalone route (like `/login`).
+* **[ ]** **Implement Logic:** Create a `handleSubmit` function that calls the `POST /api/users/` endpoint with the form data.
+* **[ ]** **Add Error Handling:** Add state to display backend validation errors (e.g., "This username is already taken.").
+* **[ ]** **Handle Success:** On successful registration, redirect the user to the `/login` page with a success message.
 
 ---
 
