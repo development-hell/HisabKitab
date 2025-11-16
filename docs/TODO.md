@@ -82,16 +82,53 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Update Connection Serializers (Backend)
+
+**Goal:** Prepare the `connections` API to return full user data for the frontend lists.
+
+* **[x]** **Backend (Serializer):** Create `NestedUserSerializer` in `users/serializers.py`.
+* **[x]** **Backend (Serializer):** Create `UserConnectionListSerializer` in `connections/serializers.py`.
+* **[x]** **Backend (View):** Update `UserConnectionViewSet` to use `get_serializer_class` to switch between `List` and `Create` serializers.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
-### ◻️ Unify "Contacts" List (Show Connections)
+### ◻️ Update Backend Tests
 
-**Goal:** Update the "Contacts" page to display both `External Contacts` (from mock data) and `User Connections` (from the API), fulfilling the "Chat-Centric UI" vision.
+**Goal:** Fix failing tests and add new ones to cover all recent API changes (Connections, Users, Security).
 
-* **[ ]** **Backend (Serializer):** Update `connections/serializers.py`. The `GET /api/connections/` response needs to include the *full user details* for the `requester` and `receiver`, not just their IDs/usernames. (e.g., use a nested `UserSerializer`). This is needed to display their name in the list.
-* **[ ]** **Frontend (Data Fetching):** In `ContactList.tsx`, add a `useEffect` to fetch from `api.get("connections/")`.
-* **[ ]** **Frontend (Merge Logic):** In `ContactList.tsx`, create a new state variable (e.g., `combinedList`). Merge the `mockContacts` with the results from the `connections/` API.
-* **[ ]** **Frontend (Render):** Update the `map` function to render the `combinedList`, differentiating between a `Contact` (e.g., "Grocery Store") and a `Connection` (e.g., "Kishan Dev").
+* **[ ]** **Unit Tests:** Review and update unit tests for `users` and `connections` models.
+* **[ ]** **Integration Tests (Fix):** Fix failing API tests in `backend/connections/tests/`. Update them to post a `username` instead of a `user_id` and check for the new error messages.
+* **[ ]** **Integration Tests (New):** Write a new API test for the `UserViewSet` security fix (e.g., assert `GET /api/users/` returns 403).
+* **[ ]** **Integration Tests (New):** Write new API tests for the `UserConnectionViewSet.create` validation logic (e.g., test for 'already connected', 'self-request' errors).
+
+---
+
+### ◻️ Create Frontend Tests
+
+**Goal:** Add unit and integration tests to the frontend to ensure components and hooks are working correctly.
+
+* **[ ]** **Unit Tests:** Write unit tests for critical components (e.g., `Sidebar.tsx`, `ContactList.tsx`).
+* **[ ]** **Unit Tests:** Write unit tests for custom hooks (e.g., `useAuth`, `useTheme`).
+* **[ ]** **Integration Tests:** Write integration tests for key user flows (e.g., Login, Register, Send Connection Request) using `Mock Service Worker` as mentioned in the SRS.
+
+---
+
+### ◻️ Implement Unified "Chat List" API
+
+**Goal:** Create the backend API for `Entities` (e.g., "Grocery Store") and a single endpoint to serve a unified list of all "chat" items (Contacts + Connections) to the frontend.
+
+* **[ ]** **Backend (Model):** Create the `Entity` model in a new `entities/models.py` file (based on the `hisab_kitab_schema.sql`).
+* **[ ]** **Backend (Serializers & Views):** Create `entities/serializers.py` and `entities/views.py` with a standard `EntityViewSet` for basic CRUD operations.
+* **[ ]** **Backend (New Endpoint):** Create a new, read-only `ChatListViewSet` at `GET /api/chat-list/`. This view will:
+    * Query `UserConnection` where `status="accepted"`.
+    * Query `Entity` where `type="EXTERNAL_PAYEE"`.
+    * Combine and return them in a single, standardized list.
+* **[ ]** **Frontend (Refactor):** Update `ContactList.tsx` to:
+    * Remove all mock data (`mockContacts`).
+    * Fetch data from the new `GET /api/chat-list/` endpoint.
+    * Render the unified list.
 
 ---
 
