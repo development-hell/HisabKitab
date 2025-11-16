@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import UserConnection
-from .serializers import UserConnectionSerializer
+from .serializers import UserConnectionListSerializer, UserConnectionSerializer
 
 
 class IsInvolvedPermission(permissions.BasePermission):
@@ -20,6 +20,15 @@ class UserConnectionViewSet(viewsets.ModelViewSet):
     queryset = UserConnection.objects.all().order_by("-created_at")
     serializer_class = UserConnectionSerializer
     permission_classes = [permissions.IsAuthenticated, IsInvolvedPermission]
+
+    def get_serializer_class(self):
+        """
+        Use UserConnectionListSerializer for 'list' and 'retrieve' actions,
+        and UserConnectionSerializer for all other actions (create, update).
+        """
+        if self.action in ["list", "retrieve"]:
+            return UserConnectionListSerializer
+        return UserConnectionSerializer
 
     def get_queryset(self):
         # restrict list to connections where current user is involved

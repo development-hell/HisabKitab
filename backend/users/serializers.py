@@ -3,6 +3,18 @@ from rest_framework import serializers
 from .models import User
 
 
+class NestedUserSerializer(serializers.ModelSerializer):
+    """
+    A lightweight serializer for displaying user info in nested lists,
+    e.g., in the connections list.
+    """
+
+    class Meta:
+        model = User
+        fields = ["user_id", "username", "first_name", "last_name", "profile_image"]
+        read_only_fields = fields
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -10,11 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ["user_id", "is_active", "role", "email"]
         extra_kwargs = {
             "password": {"write_only": True},
-             "username": {"validators": []},
+            "username": {"validators": []},
         }
 
     profile_image = serializers.ImageField(required=False, allow_null=True)
-    
+
     def validate_username(self, value):
         """Allow updating existing username, but prevent duplicates."""
         user = self.instance
