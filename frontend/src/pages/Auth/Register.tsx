@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import api from "../lib/axios";
+import { useAuth } from "../../hooks/useAuth";
+import api from "../../lib/axios";
 
 export default function Register() {
 	const { user } = useAuth();
@@ -63,7 +63,7 @@ export default function Register() {
 	}
 
 	return (
-		<div className="min-h-screen flex items-center justify-center py-12 px-4">
+		<div className="flex items-center justify-center py-12 px-4">
 			<form onSubmit={handleSubmit} className="w-full max-w-md p-8 bg-surface rounded-xl shadow-smooth space-y-4">
 				<h1 className="text-2xl font-semibold mb-4 text-center">Create Your Account</h1>
 
@@ -71,32 +71,43 @@ export default function Register() {
 
 				<div className="flex flex-col md:flex-row gap-4">
 					<div className="flex-1">
-						<label className="block text-sm">First Name</label>
-						<input required name="first_name" value={formData.first_name} onChange={handleChange} className="w-full mb-1" type="text" />
+						<label htmlFor="first_name" className="block text-sm">
+							First Name
+						</label>
+						<input id="first_name" required name="first_name" value={formData.first_name} onChange={handleChange} className="w-full mb-1" type="text" />
 						{errors.first_name && <p className="text-danger text-xs">{errors.first_name}</p>}
 					</div>
 					<div className="flex-1">
-						<label className="block text-sm">Last Name</label>
-						<input required name="last_name" value={formData.last_name} onChange={handleChange} className="w-full mb-1" type="text" />
+						<label htmlFor="last_name" className="block text-sm">
+							Last Name
+						</label>
+						<input id="last_name" required name="last_name" value={formData.last_name} onChange={handleChange} className="w-full mb-1" type="text" />
 						{errors.last_name && <p className="text-danger text-xs">{errors.last_name}</p>}
 					</div>
 				</div>
 
 				<div>
-					<label className="block text-sm">Username</label>
-					<input required name="username" value={formData.username} onChange={handleChange} className="w-full mb-1" type="text" />
+					<label htmlFor="username" className="block text-sm">
+						Username
+					</label>
+					<input id="username" required name="username" value={formData.username} onChange={handleChange} className="w-full mb-1" type="text" />
 					{errors.username && <p className="text-danger text-xs">{errors.username}</p>}
 				</div>
 
 				<div>
-					<label className="block text-sm">Email</label>
-					<input required name="email" value={formData.email} onChange={handleChange} className="w-full mb-1" type="email" autoComplete="email" />
+					<label htmlFor="email" className="block text-sm">
+						Email
+					</label>
+					<input id="email" required name="email" value={formData.email} onChange={handleChange} className="w-full mb-1" type="email" autoComplete="email" />
 					{errors.email && <p className="text-danger text-xs">{errors.email}</p>}
 				</div>
 
 				<div>
-					<label className="block text-sm">Password</label>
+					<label htmlFor="password" className="block text-sm">
+						Password
+					</label>
 					<input
+						id="password"
 						type="password"
 						required
 						name="password"
@@ -109,8 +120,11 @@ export default function Register() {
 				</div>
 
 				<div>
-					<label className="block text-sm">Confirm Password</label>
+					<label htmlFor="confirmPassword" className="block text-sm">
+						Confirm Password
+					</label>
 					<input
+						id="confirmPassword"
 						type="password"
 						required
 						name="confirmPassword"

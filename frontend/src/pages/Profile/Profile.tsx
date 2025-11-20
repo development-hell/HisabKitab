@@ -1,7 +1,7 @@
 import { Check, Pencil, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import api from "../lib/axios";
+import { useAuth } from "../../hooks/useAuth";
+import api from "../../lib/axios";
 
 interface FieldErrors {
 	[key: string]: string[];
@@ -9,8 +9,8 @@ interface FieldErrors {
 
 export default function Profile() {
 	const { user } = useAuth();
-	const [profile, setProfile] = useState<any>(null);
-	const [loading, setLoading] = useState(true);
+
+	const [profile, setProfile] = useState<any>(user);
 	const [editMode, setEditMode] = useState(false);
 	const [saving, setSaving] = useState(false);
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -19,23 +19,11 @@ export default function Profile() {
 	const [message, setMessage] = useState("");
 
 	useEffect(() => {
-		const fetchProfile = async () => {
-			try {
-				const res = await api.get(`users/${user?.user_id}/`);
-				setProfile(res.data);
-			} catch {
-				setMessage("❌ Failed to load profile");
-			} finally {
-				setLoading(false);
-			}
-		};
+		if (user && !editMode) {
+			setProfile(user);
+		}
+	}, [user, editMode]);
 
-		if (user) fetchProfile();
-	}, [user]);
-
-	/* =======================
-       EDIT / CANCEL
-  ========================= */
 	const startEdit = () => {
 		setEditMode(true);
 		setFieldErrors({});
@@ -45,12 +33,9 @@ export default function Profile() {
 		setEditMode(false);
 		setSelectedFile(null);
 		setFieldErrors({});
-		api.get(`users/${user?.user_id}/`).then((res) => setProfile(res.data));
+		setProfile(user);
 	};
 
-	/* =======================
-       SAVE CHANGES
-  ========================= */
 	const saveChanges = async () => {
 		setSaving(true);
 		setFieldErrors({});
@@ -65,7 +50,7 @@ export default function Profile() {
 
 			if (selectedFile) formData.append("profile_image", selectedFile);
 
-			await api.patch(`users/${user?.user_id}/`, formData);
+			await api.patch(`users/me/`, formData);
 
 			setMessage("✅ Profile updated successfully!");
 			setEditMode(false);
@@ -80,21 +65,10 @@ export default function Profile() {
 		}
 	};
 
-	/* =======================
-       LOADING SPINNER
-  ========================= */
-	if (loading)
-		return (
-			<div className="flex items-center justify-center h-[70vh]">
-				<div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-			</div>
-		);
+	if (!profile) return null;
 
 	return (
 		<div className="max-w-2xl mx-auto space-y-6 p-6">
-			{/* =======================
-            PROFILE HEADER
-        ========================= */}
 			<div className="bg-surface text-surface-foreground rounded-xl p-8 shadow-smooth flex flex-col items-center gap-4">
 				<img
 					src={profile.profile_image ? profile.profile_image : `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.first_name || profile.username)}`}
@@ -114,14 +88,12 @@ export default function Profile() {
 				)}
 			</div>
 
-			{/* =======================
-            GENERAL INFORMATION
-        ========================= */}
 			<div className="bg-surface text-surface-foreground rounded-xl shadow-smooth p-6">
 				<h3 className="font-semibold text-lg mb-4">General Information</h3>
 
 				<div className="space-y-4">
 					<ProfileRow
+						id="first_name" // <-- ADDED ID
 						label="First Name"
 						editable={editMode}
 						value={profile.first_name}
@@ -130,6 +102,7 @@ export default function Profile() {
 					/>
 
 					<ProfileRow
+						id="last_name" // <-- ADDED ID
 						label="Last Name"
 						editable={editMode}
 						value={profile.last_name}
@@ -138,6 +111,7 @@ export default function Profile() {
 					/>
 
 					<ProfileRow
+						id="phone_number" // <-- ADDED ID
 						label="Phone Number"
 						editable={editMode}
 						value={profile.phone_number}
@@ -146,6 +120,7 @@ export default function Profile() {
 					/>
 
 					<ProfileRow
+						id="username" // <-- ADDED ID
 						label="Username"
 						editable={editMode}
 						value={profile.username}
@@ -165,9 +140,7 @@ export default function Profile() {
 				{message && <p className={`text-sm mt-4 ${message.startsWith("❌") ? "text-danger" : "text-accent"}`}>{message}</p>}
 			</div>
 
-			{/* =======================
-            ACTION BUTTONS
-        ========================= */}
+			{/* ACTION BUTTONS */}
 			{editMode && (
 				<div className="flex gap-4 justify-end">
 					<button onClick={cancelEdit} className="btn px-4 py-2 border border-base rounded-md flex items-center gap-2">
@@ -185,7 +158,7 @@ export default function Profile() {
 }
 
 /* =========================================================
-   REUSABLE PROFILE ROW COMPONENT (with error display)
+   REUSABLE PROFILE ROW COMPONENT (NOW ACCESSIBLE)
 ========================================================= */
 function ProfileRow({
 	label,
@@ -193,20 +166,26 @@ function ProfileRow({
 	editable,
 	error,
 	onChange,
+	id, // <-- NEW PROP
 }: {
 	label: string;
 	value: string;
 	editable: boolean;
 	error?: string[];
 	onChange?: (v: string) => void;
+	id: string; // <-- NEW PROP
 }) {
 	return (
 		<div className="flex flex-col">
 			<div className="flex justify-between items-center py-2 border-b border-base">
-				<span className="text-muted">{label}</span>
+				{/* CHANGED <span> to <label> and added htmlFor */}
+				<label htmlFor={id} className="text-muted">
+					{label}
+				</label>
 
 				{editable ? (
 					<input
+						id={id} // <-- ADDED ID
 						value={value || ""}
 						onChange={(e) => onChange?.(e.target.value)}
 						className={`bg-surface border rounded-md px-3 py-1 w-48 ${error ? "border-danger" : "border-base"}`}

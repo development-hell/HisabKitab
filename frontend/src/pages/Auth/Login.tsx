@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
 	const { login, user } = useAuth();
@@ -31,7 +31,7 @@ export default function Login() {
 			navigate(next, { replace: true });
 		} catch (err: any) {
 			console.error(err);
-			const message = err?.response?.data || "Invalid credentials or server error";
+			const message = err?.response?.detail || "Invalid credentials";
 			setMessage(String(message));
 		} finally {
 			setLoading(false);
@@ -47,11 +47,16 @@ export default function Login() {
 			<form onSubmit={handleSubmit} className="w-full max-w-sm p-6 bg-surface rounded">
 				<h1 className="text-xl font-semibold mb-4">Sign in</h1>
 
-				<label className="block text-sm">Email</label>
-				<input required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full mb-3" type="email" autoComplete="email" />
+				<label htmlFor="email" className="block text-sm">
+					Email
+				</label>
+				<input id="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full mb-3" type="email" autoComplete="email" />
 
-				<label className="block text-sm">Password</label>
+				<label htmlFor="password" className="block text-sm">
+					Password
+				</label>
 				<input
+					id="password"
 					type="password"
 					required
 					value={password}
