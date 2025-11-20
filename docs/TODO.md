@@ -104,6 +104,17 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Fix Auth Pages UI/UX
+
+**Goal:** Improve the visual aesthetics and layout of Login and Register pages.
+
+- **[x]** **Refactor Login:** Remove layout conflicts, use `card` utility, and improve input styling.
+- **[x]** **Refactor Register:** Match Login page design, use `card` utility, and improve input styling.
+- **[x]** **Fix Theme Issues:** Fix invalid `rgb` color usage in `MainLayout`, `Footer`, and `ThemeToggle`.
+- **[x]** **Update Tailwind Usage:** Switch to cleaner Tailwind v4 utility classes (e.g., `text-foreground`).
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 ### ◻️ Create Frontend Tests

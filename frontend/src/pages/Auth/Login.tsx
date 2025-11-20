@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
@@ -43,34 +43,72 @@ export default function Login() {
 	}
 
 	return (
-		<div className="min-h-screen flex items-center justify-center">
-			<form onSubmit={handleSubmit} className="w-full max-w-sm p-6 bg-surface rounded">
-				<h1 className="text-xl font-semibold mb-4">Sign in</h1>
+		<div className="flex flex-col items-center justify-center h-full py-12 px-4 sm:px-6 lg:px-8">
+			<div className="card w-full max-w-md space-y-8">
+				<div>
+					<h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+						Sign in to your account
+					</h2>
+					<p className="mt-2 text-center text-sm text-muted">
+						Or{" "}
+						<Link to="/register" className="font-medium text-primary hover:text-primary/80">
+							create a new account
+						</Link>
+					</p>
+				</div>
+				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+					<div className="rounded-md shadow-sm -space-y-px">
+						<div className="mb-4">
+							<label htmlFor="email-address" className="block text-sm font-medium text-foreground mb-1">
+								Email address
+							</label>
+							<input
+								id="email-address"
+								name="email"
+								type="email"
+								autoComplete="email"
+								required
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								placeholder="Email address"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</div>
+						<div>
+							<label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
+								Password
+							</label>
+							<input
+								id="password"
+								name="password"
+								type="password"
+								autoComplete="current-password"
+								required
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								placeholder="Password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
+					</div>
 
-				<label htmlFor="email" className="block text-sm">
-					Email
-				</label>
-				<input id="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full mb-3" type="email" autoComplete="email" />
+					<div>
+						<button
+							type="submit"
+							disabled={loading}
+							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+						>
+							{loading ? "Signing in..." : "Sign in"}
+						</button>
+					</div>
 
-				<label htmlFor="password" className="block text-sm">
-					Password
-				</label>
-				<input
-					id="password"
-					type="password"
-					required
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					className="w-full mb-4"
-					autoComplete="current-password"
-				/>
-
-				<button disabled={loading} className="btn btn-primary w-full">
-					{loading ? "Signing in..." : "Sign in"}
-				</button>
-
-				{message && <p className={`text-center mt-3 ${message.startsWith("✅") ? "text-accent" : "text-danger"}`}>{message}</p>}
-			</form>
+					{message && (
+						<div className={`text-center text-sm ${message.startsWith("✅") ? "text-accent" : "text-danger"}`}>
+							{message}
+						</div>
+					)}
+				</form>
+			</div>
 		</div>
 	);
 }

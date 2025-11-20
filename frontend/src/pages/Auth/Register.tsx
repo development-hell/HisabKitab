@@ -63,89 +63,135 @@ export default function Register() {
 	}
 
 	return (
-		<div className="flex items-center justify-center py-12 px-4">
-			<form onSubmit={handleSubmit} className="w-full max-w-md p-8 bg-surface rounded-xl shadow-smooth space-y-4">
-				<h1 className="text-2xl font-semibold mb-4 text-center">Create Your Account</h1>
+		<div className="flex flex-col items-center justify-center h-full py-12 px-4 sm:px-6 lg:px-8">
+			<div className="card w-full max-w-md space-y-8">
+				<div>
+					<h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+						Create your account
+					</h2>
+					<p className="mt-2 text-center text-sm text-muted">
+						Already have an account?{" "}
+						<Link to="/login" className="font-medium text-primary hover:text-primary/80">
+							Sign in
+						</Link>
+					</p>
+				</div>
 
-				{errors.form && <p className="text-danger text-sm text-center">{errors.form}</p>}
+				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+					{errors.form && <p className="text-danger text-sm text-center">{errors.form}</p>}
 
-				<div className="flex flex-col md:flex-row gap-4">
-					<div className="flex-1">
-						<label htmlFor="first_name" className="block text-sm">
-							First Name
-						</label>
-						<input id="first_name" required name="first_name" value={formData.first_name} onChange={handleChange} className="w-full mb-1" type="text" />
-						{errors.first_name && <p className="text-danger text-xs">{errors.first_name}</p>}
+					<div className="space-y-4">
+						<div className="flex flex-col md:flex-row gap-4">
+							<div className="flex-1">
+								<label htmlFor="first_name" className="block text-sm font-medium text-foreground mb-1">
+									First Name
+								</label>
+								<input
+									id="first_name"
+									required
+									name="first_name"
+									value={formData.first_name}
+									onChange={handleChange}
+									className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+									type="text"
+								/>
+								{errors.first_name && <p className="text-danger text-xs mt-1">{errors.first_name}</p>}
+							</div>
+							<div className="flex-1">
+								<label htmlFor="last_name" className="block text-sm font-medium text-foreground mb-1">
+									Last Name
+								</label>
+								<input
+									id="last_name"
+									required
+									name="last_name"
+									value={formData.last_name}
+									onChange={handleChange}
+									className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+									type="text"
+								/>
+								{errors.last_name && <p className="text-danger text-xs mt-1">{errors.last_name}</p>}
+							</div>
+						</div>
+
+						<div>
+							<label htmlFor="username" className="block text-sm font-medium text-foreground mb-1">
+								Username
+							</label>
+							<input
+								id="username"
+								required
+								name="username"
+								value={formData.username}
+								onChange={handleChange}
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								type="text"
+							/>
+							{errors.username && <p className="text-danger text-xs mt-1">{errors.username}</p>}
+						</div>
+
+						<div>
+							<label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
+								Email
+							</label>
+							<input
+								id="email"
+								required
+								name="email"
+								value={formData.email}
+								onChange={handleChange}
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								type="email"
+								autoComplete="email"
+							/>
+							{errors.email && <p className="text-danger text-xs mt-1">{errors.email}</p>}
+						</div>
+
+						<div>
+							<label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
+								Password
+							</label>
+							<input
+								id="password"
+								type="password"
+								required
+								name="password"
+								value={formData.password}
+								onChange={handleChange}
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								autoComplete="new-password"
+							/>
+							{errors.password && <p className="text-danger text-xs mt-1">{errors.password}</p>}
+						</div>
+
+						<div>
+							<label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-1">
+								Confirm Password
+							</label>
+							<input
+								id="confirmPassword"
+								type="password"
+								required
+								name="confirmPassword"
+								value={formData.confirmPassword}
+								onChange={handleChange}
+								className="appearance-none relative block w-full px-3 py-2 border border-border placeholder-muted text-foreground rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm bg-background"
+								autoComplete="new-password"
+							/>
+						</div>
 					</div>
-					<div className="flex-1">
-						<label htmlFor="last_name" className="block text-sm">
-							Last Name
-						</label>
-						<input id="last_name" required name="last_name" value={formData.last_name} onChange={handleChange} className="w-full mb-1" type="text" />
-						{errors.last_name && <p className="text-danger text-xs">{errors.last_name}</p>}
+
+					<div>
+						<button
+							type="submit"
+							disabled={loading}
+							className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+						>
+							{loading ? "Creating Account..." : "Create Account"}
+						</button>
 					</div>
-				</div>
-
-				<div>
-					<label htmlFor="username" className="block text-sm">
-						Username
-					</label>
-					<input id="username" required name="username" value={formData.username} onChange={handleChange} className="w-full mb-1" type="text" />
-					{errors.username && <p className="text-danger text-xs">{errors.username}</p>}
-				</div>
-
-				<div>
-					<label htmlFor="email" className="block text-sm">
-						Email
-					</label>
-					<input id="email" required name="email" value={formData.email} onChange={handleChange} className="w-full mb-1" type="email" autoComplete="email" />
-					{errors.email && <p className="text-danger text-xs">{errors.email}</p>}
-				</div>
-
-				<div>
-					<label htmlFor="password" className="block text-sm">
-						Password
-					</label>
-					<input
-						id="password"
-						type="password"
-						required
-						name="password"
-						value={formData.password}
-						onChange={handleChange}
-						className="w-full mb-1"
-						autoComplete="new-password"
-					/>
-					{errors.password && <p className="text-danger text-xs">{errors.password}</p>}
-				</div>
-
-				<div>
-					<label htmlFor="confirmPassword" className="block text-sm">
-						Confirm Password
-					</label>
-					<input
-						id="confirmPassword"
-						type="password"
-						required
-						name="confirmPassword"
-						value={formData.confirmPassword}
-						onChange={handleChange}
-						className="w-full mb-1"
-						autoComplete="new-password"
-					/>
-				</div>
-
-				<button disabled={loading} className="btn btn-primary w-full mt-4">
-					{loading ? "Creating Account..." : "Create Account"}
-				</button>
-
-				<p className="text-sm text-center text-muted">
-					Already have an account?{" "}
-					<Link to="/login" className="font-medium text-primary hover:underline">
-						Sign in
-					</Link>
-				</p>
-			</form>
+				</form>
+			</div>
 		</div>
 	);
 }

@@ -17,10 +17,10 @@ export default function ThemeToggle() {
 	return (
 		<button
 			onClick={toggleTheme}
-			className="p-2 rounded-md bg-[rgb(var(--color-card))] hover:bg-blue-100 dark:hover:bg-gray-700 transition-all duration-200"
+			className="p-2 rounded-md hover:bg-muted transition-all duration-200 text-foreground"
 			title={`Current: ${theme}`}
 		>
-			{theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />}
+			{theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
 		</button>
 	);
 }
