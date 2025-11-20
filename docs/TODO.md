@@ -128,24 +128,23 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Unified "Chat List" API
+
+**Goal:** Create the backend API for `Entities` (e.g., "Grocery Store") and a single endpoint to serve a unified list of all "chat" items (Contacts + Connections) to the frontend.
+
+- **[x]** **Backend (Model):** Create the `Entity` model in a new `entities/models.py` file.
+- **[x]** **Backend (Serializers & Views):** Create `entities/serializers.py` and `entities/views.py` with a standard `EntityViewSet` for basic CRUD operations.
+- **[x]** **Backend (New Endpoint):** Create a new, read-only `ChatListViewSet` at `GET /api/chat-list/`.
+- **[x]** **Frontend (Refactor):** Update `ContactList.tsx` to fetch data from the new `GET /api/chat-list/` endpoint and render the unified list.
+- **[x]** **Frontend (Test):** Verified with `ContactList.test.tsx`.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 
 
-### ◻️ Implement Unified "Chat List" API
 
-**Goal:** Create the backend API for `Entities` (e.g., "Grocery Store") and a single endpoint to serve a unified list of all "chat" items (Contacts + Connections) to the frontend.
-
-- **[ ]** **Backend (Model):** Create the `Entity` model in a new `entities/models.py` file (based on the `hisab_kitab_schema.sql`).
-- **[ ]** **Backend (Serializers & Views):** Create `entities/serializers.py` and `entities/views.py` with a standard `EntityViewSet` for basic CRUD operations.
-- **[ ]** **Backend (New Endpoint):** Create a new, read-only `ChatListViewSet` at `GET /api/chat-list/`. This view will:
-  - Query `UserConnection` where `status="accepted"`.
-  - Query `Entity` where `type="EXTERNAL_PAYEE"`.
-  - Combine and return them in a single, standardized list.
-- **[ ]** **Frontend (Refactor):** Update `ContactList.tsx` to:
-  - Remove all mock data (`mockContacts`).
-  - Fetch data from the new `GET /api/chat-list/` endpoint.
-  - Render the unified list.
 
 ---
 

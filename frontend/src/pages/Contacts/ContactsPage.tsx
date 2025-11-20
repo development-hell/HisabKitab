@@ -3,7 +3,7 @@ import ContactDetails from "./ContactDetails";
 import ContactList from "./ContactList";
 
 export default function ContactsPage() {
-	const [selectedContact, setSelectedContact] = useState<number | null>(null);
+	const [selectedContact, setSelectedContact] = useState<string | null>(null);
 
 	return (
 		<div className="flex h-full bg-base text-base">

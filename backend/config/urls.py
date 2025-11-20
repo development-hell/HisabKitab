@@ -24,10 +24,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from connections.views import UserConnectionViewSet
 from users.views import UserViewSet
+from entities.views import EntityViewSet, ChatListViewSet
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet, basename="users")
 router.register(r"connections", UserConnectionViewSet, basename="connections")
+router.register(r"entities", EntityViewSet, basename="entities")
+router.register(r"chat-list", ChatListViewSet, basename="chat-list")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

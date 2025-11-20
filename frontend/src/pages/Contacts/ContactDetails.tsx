@@ -1,7 +1,7 @@
 import { ArrowLeft, Users } from "lucide-react";
 
 interface Props {
-	contactId: number | null;
+	contactId: string | null;
 	onBack: () => void;
 }
 
