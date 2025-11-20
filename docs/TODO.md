@@ -115,17 +115,22 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
-## 2. Pending Code Changes (To-Do)
-
-### ◻️ Create Frontend Tests
+### ☑️ Create Frontend Tests
 
 **Goal:** Add unit and integration tests to the frontend to ensure components and hooks are working correctly.
 
-- **[ ]** **Unit Tests:** Write unit tests for critical components (e.g., `Sidebar.tsx`, `ContactList.tsx`).
-- **[ ]** **Unit Tests:** Write unit tests for custom hooks (e.g., `useAuth`, `useTheme`).
-- **[ ]** **Integration Tests:** Write integration tests for key user flows (e.g., Login, Register, Send Connection Request) using `Mock Service Worker` as mentioned in the SRS.
+- **[x]** **Unit Tests:** Write unit tests for critical components (e.g., `Sidebar.tsx`, `ContactList.tsx`).
+- **[x]** **Unit Tests:** Write unit tests for custom hooks (`useAuth`, `useTheme`).
+- **[x]** **Integration Tests:** Write integration tests for key user flows:
+  - **Login & Register:** Verified with `Login.test.tsx` and `Register.test.tsx`.
+  - **Authentication:** Verified `AuthContext` logic with `AuthContext.test.tsx`.
+  - **Connections:** Verified "Send Request" flow with `Connections.test.tsx`.
 
 ---
+
+## 2. Pending Code Changes (To-Do)
+
+
 
 ### ◻️ Implement Unified "Chat List" API
 

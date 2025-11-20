@@ -45,7 +45,7 @@ const renderRegister = () => {
 describe("Register Page", () => {
 	it("should render all form fields and the submit button", () => {
 		renderRegister();
-		expect(screen.getByRole("heading", { name: "Create Your Account" })).toBeInTheDocument();
+		expect(screen.getByRole("heading", { name: "Create your account" })).toBeInTheDocument();
 		expect(screen.getByLabelText("First Name")).toBeInTheDocument();
 		expect(screen.getByLabelText("Username")).toBeInTheDocument();
 		expect(screen.getByLabelText("Email")).toBeInTheDocument();

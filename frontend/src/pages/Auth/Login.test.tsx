@@ -40,7 +40,7 @@ describe("Login Page", () => {
 		const submitButton = await screen.findByRole("button", { name: "Sign in" });
 
 		// Fill out the form
-		fireEvent.change(screen.getByLabelText("Email"), { target: { value: "kishan@hisabkitab.com" } });
+		fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "kishan@hisabkitab.com" } });
 		fireEvent.change(screen.getByLabelText("Password"), { target: { value: "password123" } });
 
 		// Click submit
@@ -59,7 +59,7 @@ describe("Login Page", () => {
 		const submitButton = await screen.findByRole("button", { name: "Sign in" });
 
 		// Fill out with wrong credentials
-		fireEvent.change(screen.getByLabelText("Email"), { target: { value: "wrong@hisabkitab.com" } });
+		fireEvent.change(screen.getByLabelText("Email address"), { target: { value: "wrong@hisabkitab.com" } });
 		fireEvent.change(screen.getByLabelText("Password"), { target: { value: "wrongpass" } });
 
 		fireEvent.click(submitButton);

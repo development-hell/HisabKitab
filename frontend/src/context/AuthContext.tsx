@@ -10,7 +10,7 @@ interface AuthContextType {
 }
 
 // Create the context
-const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState<any>(() => getSavedUser());
