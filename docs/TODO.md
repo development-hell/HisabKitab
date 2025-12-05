@@ -184,6 +184,15 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Categories Page
+
+**Goal:** Create a frontend page to manage "Categories" (e.g., Food, Transport).
+
+- **[x]** **Frontend:** Create `CategoriesPage`, `CategoryList`, and `AddCategoryModal`.
+- **[x]** **Frontend:** Add `/categories` route and Sidebar link.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 
