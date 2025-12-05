@@ -173,6 +173,17 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Accounts Page
+
+**Goal:** Create a frontend page to manage "Accounts" (Bank Accounts, Cash, Digital Wallets) with "Smart Setup" for wallets.
+
+- **[x]** **Backend:** Update `PaymentModeSerializer` to include `supports_wallet`.
+- **[x]** **Frontend:** Create `AccountsPage`, `AccountList`, and `AddAccountModal`.
+- **[x]** **Frontend:** Implement "Smart Setup" logic (filter payment modes).
+- **[x]** **Frontend:** Add `/accounts` route and Sidebar link.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 

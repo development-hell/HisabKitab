@@ -15,6 +15,7 @@ import Login from "./pages/Auth/Login";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Auth/Register";
 import Settings from "./pages/Settings";
+import AccountsPage from "./pages/Accounts/AccountsPage";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/settings" element={<Settings />} />
 						<Route path="/contacts" element={<ContactsPage />} />
+						<Route path="/accounts" element={<AccountsPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

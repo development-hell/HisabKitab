@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Home, Link as LinkIcon, LogOut, Menu, Settings, User, Users, X } from "lucide-react";
+import { Home, Link as LinkIcon, LogOut, Menu, Settings, User, Users, Wallet, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -50,6 +50,7 @@ export default function Sidebar() {
 				{/* Links */}
 				<nav className="flex-1 p-4 space-y-3">
 					<SidebarLink to="/dashboard" label="Dashboard" icon={<Home />} collapsed={collapsed} />
+					<SidebarLink to="/accounts" label="Accounts" icon={<Wallet />} collapsed={collapsed} />
 					<SidebarLink to="/contacts" label="Contacts" icon={<Users />} collapsed={collapsed} />
 					<SidebarLink to="/connections" label="Connections" icon={<LinkIcon />} collapsed={collapsed} />
 				</nav>

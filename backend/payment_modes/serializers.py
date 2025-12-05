@@ -8,10 +8,19 @@ class SupportedAppSerializer(serializers.ModelSerializer):
         fields = ['key', 'name', 'supports_wallet', 'icon']
 
 class PaymentModeSerializer(serializers.ModelSerializer):
+    supports_wallet = serializers.SerializerMethodField()
+
     class Meta:
         model = Payment_Mode
-        fields = ['mode_id', 'name', 'app_key', 'linked_entity', 'created_at', 'updated_at']
+        fields = ['mode_id', 'name', 'app_key', 'linked_entity', 'supports_wallet', 'created_at', 'updated_at']
         read_only_fields = ['mode_id', 'created_at', 'updated_at']
+
+    def get_supports_wallet(self, obj):
+        try:
+            app = SupportedApp.objects.get(key=obj.app_key)
+            return app.supports_wallet
+        except SupportedApp.DoesNotExist:
+            return False
 
     def validate_linked_entity(self, value):
         user = self.context['request'].user
