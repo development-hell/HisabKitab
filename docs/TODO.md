@@ -162,6 +162,17 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Entity Balance
+
+**Goal:** Store `current_balance` directly on the `Entity` model to support Opening Balances without creating "System" transactions.
+
+- **[x]** **SRS:** Updated to remove "Calculated Balance" and "SYSTEM Entity" rules.
+- **[x]** **Backend (Model):** Add `current_balance` field to `Entity` model.
+- **[x]** **Backend (Serializer):** Update `EntitySerializer`.
+- **[x]** **Backend (Tests):** Add unit tests for balance persistence.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 

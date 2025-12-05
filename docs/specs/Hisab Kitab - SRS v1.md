@@ -118,7 +118,7 @@ The entire application is built on one core concept: **Everything that can hold,
 
 Your "Chat List" is simply a list of `Entity` records. A transaction is just moving money from one `Entity` (your bank) to another `Entity` (your friend's profile, a category, or a payee).
 
-The **balance** of any entity is never stored in the database. It is always **calculated** in real-time as `SUM(transactions_in) - SUM(transactions_out)`. This ensures 100% accuracy.
+The **balance** of an entity is stored in the database as `current_balance`. This allows for setting an initial "Opening Balance" without needing complex transaction history from a system account. Future transactions will update this balance.
 
 ### 4.2 Database Schema (v1.0)
 
@@ -201,7 +201,7 @@ This 6-table model is the foundation for the MVP.
   * **As a user,** I want to manage my **Contacts** (e.g., "Grocery Store") in a dedicated two-column page, allowing me to create, view, edit, and select them.
   * **As a user,** I want to add a new `Account` (Type: `Bank Account`, `Credit Card`, `Cash`).
   * **As a user,** when adding an account, I want to enter a `Name`, `Type`, and `Current Balance`.
-  * **As a user,** when I enter a `Current Balance` (e.g., "₹10,000"), I expect the system to create my new account and *also* create the first **transaction** for `+₹10,000` from a `SYSTEM` entity, described as "Opening Balance."
+  * **As a user,** when I enter a `Current Balance` (e.g., "₹10,000"), I expect the system to create my new account with this starting balance.
   * **As a user,** I want to add a `Payment Mode` (e.g., "GPay") from a **server-defined list** of apps and link it to one of my `Accounts`.
   * **As a user,** I want to add a new `Account` (Type: `Digital Wallet`) and be **forced to select** from a list of my *already-added Payment Modes* that are *known by the server to support wallets* (e.g., "My PhonePe"). The list must *not* show apps that don't have wallets (e.g., "My GPay").
 

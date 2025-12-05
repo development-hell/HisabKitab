@@ -18,6 +18,7 @@ class Entity(models.Model):
     )
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=20, choices=ENTITY_TYPES)
+    current_balance = models.DecimalField(max_digits=19, decimal_places=2, default=0.00)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

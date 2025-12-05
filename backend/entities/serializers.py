@@ -4,7 +4,7 @@ from .models import Entity
 class EntitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entity
-        fields = ['entity_id', 'name', 'type', 'created_at']
+        fields = ['entity_id', 'name', 'type', 'current_balance', 'created_at']
         read_only_fields = ['entity_id', 'created_at']
 
 class ChatListItemSerializer(serializers.Serializer):
