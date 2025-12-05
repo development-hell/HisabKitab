@@ -140,13 +140,24 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Payment Modes
+
+**Goal:** Create the backend API for `Payment Modes` and refactor supported apps to be database-driven.
+
+- **[x]** **Backend (Model):** Create `PaymentMode` and `SupportedApp` models.
+- **[x]** **Backend (Migration):** Create data migration to populate `SupportedApp`.
+- **[x]** **Backend (API):** Create `PaymentModeViewSet` and `serializers`.
+- **[x]** **Backend (Tests):** Add unit tests for models and API.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 
 
 
 
----
+
 
 ## 3. Future Tasks (Backlog)
 
