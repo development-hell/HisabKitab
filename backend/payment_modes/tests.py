@@ -100,3 +100,73 @@ class PaymentModeTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]['name'], "User A Mode")
+
+    def test_create_wallet_success(self):
+        """
+        Ensure we can create a wallet for a supported payment mode.
+        """
+        # 1. Create Payment Mode (PhonePe supports wallet)
+        payment_mode = Payment_Mode.objects.create(
+            owner=self.user_a,
+            name="My PhonePe",
+            app_key="phonepe",
+            linked_entity=self.entity_a # Linked to Bank initially
+        )
+        # Unlink it first (logic requires it to be unlinked? No, logic says "already linked" error. 
+        # Wait, if I link it to bank, I can't create wallet? 
+        # Requirement: "A 'PhonePe Wallet' Entity can only be created and linked to a 'PhonePe App' Payment_Mode."
+        # Usually, you create the mode first, then link it. 
+        # If I want to create a wallet, I should probably start with an unlinked mode or unlink it.
+        # Let's assume we start with a mode linked to nothing or we want to switch it?
+        # The code checks `if payment_mode.linked_entity: return Error`.
+        # So I must start with an unlinked mode.
+        payment_mode.linked_entity = None
+        payment_mode.save()
+
+        url = reverse('payment-mode-create-wallet', args=[payment_mode.mode_id])
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        # Verify Wallet Entity Created
+        payment_mode.refresh_from_db()
+        self.assertIsNotNone(payment_mode.linked_entity)
+        self.assertEqual(payment_mode.linked_entity.type, "WALLET")
+        self.assertEqual(payment_mode.linked_entity.name, "My PhonePe Wallet")
+        self.assertEqual(payment_mode.linked_entity.owner, self.user_a)
+
+    def test_create_wallet_not_supported(self):
+        """
+        Ensure we cannot create a wallet for an unsupported app (e.g. Cash).
+        """
+        # Create Payment Mode (Cash does not support wallet)
+        payment_mode = Payment_Mode.objects.create(
+            owner=self.user_a,
+            name="My Cash",
+            app_key="cash",
+            linked_entity=None
+        )
+
+        url = reverse('payment-mode-create-wallet', args=[payment_mode.mode_id])
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("does not support wallets", response.data['error'])
+
+    def test_create_wallet_already_linked(self):
+        """
+        Ensure we cannot create a wallet if the mode is already linked.
+        """
+        # Create Payment Mode linked to Bank
+        payment_mode = Payment_Mode.objects.create(
+            owner=self.user_a,
+            name="My PhonePe",
+            app_key="phonepe",
+            linked_entity=self.entity_a
+        )
+
+        url = reverse('payment-mode-create-wallet', args=[payment_mode.mode_id])
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("already linked", response.data['error'])

@@ -6,6 +6,7 @@ class Entity(models.Model):
         ('ACCOUNT', 'Account'),
         ('EXTERNAL_PAYEE', 'External Payee'),
         ('CATEGORY', 'Category'),
+        ('WALLET', 'Digital Wallet'),
         ('SYSTEM', 'System'),
     ]
 

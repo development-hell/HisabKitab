@@ -24,7 +24,9 @@ class Payment_Mode(models.Model):
         Entity,
         on_delete=models.CASCADE,
         related_name='linked_payment_modes',
-        help_text="The underlying account (e.g., Bank Account) for this payment mode."
+        help_text="The underlying account (e.g., Bank Account) for this payment mode.",
+        null=True,
+        blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

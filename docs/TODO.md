@@ -151,6 +151,17 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Smart Setup & Wallets
+
+**Goal:** Implement "Digital Wallet" entities and the "Smart Setup" flow where a wallet is created specifically for a supported Payment Mode.
+
+- **[x]** **Backend (Model):** Add `WALLET` to `ENTITY_TYPES`.
+- **[x]** **Backend (Model):** Update `Payment_Mode` to allow unlinked modes (nullable `linked_entity`).
+- **[x]** **Backend (API):** Implement `POST /api/payment-modes/{id}/create-wallet/` endpoint.
+- **[x]** **Backend (Tests):** Add unit tests for wallet creation logic.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 
