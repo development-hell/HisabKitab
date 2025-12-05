@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "connections",
     "entities",
     "payment_modes",
+    "core_transaction",
 ]
 
 MIDDLEWARE = [

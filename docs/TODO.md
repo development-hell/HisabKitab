@@ -193,6 +193,17 @@ This is a living document to track pending development tasks, refactors, and bac
 
 ---
 
+### ☑️ Implement Transaction Frontend
+
+**Goal:** Create a frontend interface to view and add transactions.
+
+- **[x]** **Frontend:** Create `TransactionsPage` and `TransactionList`.
+- **[x]** **Frontend:** Implement `AddTransactionModal` with simplified flow (From -> To).
+- **[x]** **Frontend:** Support "Connected Users" as destinations (auto-create payee).
+- **[x]** **Frontend:** Add `/transactions` route and Sidebar link.
+
+---
+
 ## 2. Pending Code Changes (To-Do)
 
 
